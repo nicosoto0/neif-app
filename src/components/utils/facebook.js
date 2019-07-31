@@ -1,0 +1,139 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import FacebookLogin from 'react-facebook-login';
+import { checkFBToken } from './services/checkFBToken';
+import { connect } from 'react-redux';
+import InlineError from "../messages/InlineError";
+import { Button } from 'semantic-ui-react'
+
+export class Facebook extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isLoggedIn: this.props.LoggedInFb,
+            token: '',
+            errors: {}
+        };
+    }
+
+    componentDidMount() {
+        //this.loadComments();
+        this.checkValidToken(this.props.fb_toke);
+
+        if (this.state.errors.hasOwnProperty('fbLogin')){
+            localStorage.removeItem('neif_analytics');
+            this.setState({
+                isLoggedIn: false,
+                token: ''
+            });
+        }
+      }
+
+
+    async checkValidToken(token) {
+        
+        // ---  Wrong token example for tests --- 
+        // let token_extra = 'EAAPnCOzlPwkBABRTIEuUg0OFNdFuQNcDPXmMN1GqPFEyM2dZBx8XlY2geBgIyqcPnKmYTdVYXl8jOn6gLeYIVb4veebVZAZBq9fZAsB7kJOVKfCiNC23BJwsEgsXEtXRdLCB0EWtXZCQuG8NfKHgSQ34HSNQY812l63WRaZB7TncqBrZAxQjSexS0bKyLuohAfF9elRvBiNen2GIOlfKH6N'
+        const request = await checkFBToken(token);
+
+        // --- Check for errors --- 
+        const errors = {};
+        if (request.hasOwnProperty('error')){
+
+            errors.fbLogin = request.error.message;
+        }
+        this.setState({ errors });
+
+    }
+
+    async useResponse(response){
+
+        if (response.hasOwnProperty('accessToken')){
+            await this.checkValidToken(response.accessToken);
+            if (this.state.errors.hasOwnProperty('fbLogin')){
+                localStorage.removeItem('neif_analytics');
+                this.setState({
+                    isLoggedIn: false,
+                    token: ''
+                });
+
+            } else {
+                localStorage.neif_analytics = response.accessToken;
+                this.setState({
+                    isLoggedIn: true,
+                    token: response.accessToken
+                });
+            }
+
+        } else {
+            localStorage.removeItem('neif_analytics');
+            this.setState({
+                isLoggedIn: false,
+                token: ''
+            });
+        }
+
+
+    }
+
+    responseFacebook = response => {
+        this.useResponse(response);
+      }
+
+
+    render(){
+        let fbContent;
+
+        const errors = this.state.errors;
+
+
+        if (!this.state.isLoggedIn){
+            fbContent = (
+            <div>
+                <h1>Fb Login Page </h1>
+
+                <FacebookLogin
+                    appId="398941727624478"
+                    autoLoad={true}
+                    fields="name,email,picture,accounts"
+                    callback={this.responseFacebook} /> <br/>
+                {errors.fbLogin && <InlineError text={errors.fbLogin + ' Try Again please'} />}
+
+            </div>
+            );
+
+        } else {
+            fbContent =(
+                <div>
+                    <Button href="/fb/profile">Fb Profile Info</Button>
+                    <br />
+                    <br />
+                    <Button href="/fb/accounts">Fb FanPages</Button>
+                </div>
+
+            );
+        }
+
+
+        return (
+            <div>{fbContent}</div>
+        )
+    }
+
+}
+
+// <FbShowProfile accessToken={this.state.token} />
+// <FbAccounts accessToken={this.state.token}/>
+
+Facebook.propTypes = {
+    LoggedInFb: PropTypes.bool.isRequired
+};
+
+function mapStateToProps(state){
+    return {
+      fb_toke: state.fbuser.token
+    };
+}
+  
+  
+export default connect(mapStateToProps)(Facebook);

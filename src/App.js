@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router-dom';
+import HomePage from "./components/pages/HomePage";
+//import LoginPage from "./components/pages/LoginPage"
+import FbPage from "./components/pages/FbPage";
+import FbProfilePage from "./components/pages/FbProfilePage"
+import FbAccountsPage from "./components/pages/FbAccountsPage"
+import AppHeader from "./components/utils/AppHeader";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+const App = () => (
+  <div>
+    <AppHeader />
+    <div className="ui container">
+      <Route path="/" exact component={HomePage} />
+      <Route path="/fb" exact component={FbPage} />
+      <Route path="/fb/profile" exact component={FbProfilePage} />
+      <Route path="/fb/accounts" exact component={FbAccountsPage} />
     </div>
-  );
-}
+  </div>);
+
+//      <Route path="/login" exact component={LoginPage} /> <br />
 
 export default App;
