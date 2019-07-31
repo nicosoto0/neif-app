@@ -1,46 +1,48 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Before Start
+# Requirements
+- **node**: ^8.10.0
+- **npm**: ^5.6.0
+- **yarn**: ^1.9.4
 
-1. Run following command to install dependencies:
-```ssh
-yarn add --dev eslint prettier eslint-config-airbnb@^15.0.1 eslint-config-prettier eslint-plugi
-n-prettier eslint-plugin-react eslint-plugin-import eslint-plugin-jsx-a11y@^5.1.1
+PS: It is posible that the app can work with other versiones of the requirements (higher more than lower). The requirementes versiones listed are then ones used during development. 
+PS2: It's posible to switch easily **node** version with **Node Version Manager** (nvm) :
+```bash
+nvm install 8.10.0
+```
+# Running App
 
+1. Install all packages:
+
+```bash
+yarn install
 ```
 
-### For stayle:
-```ssh
-yarn add semantic-ui-react semantic-ui-css
+For more details on dependencies and packages, check package.json file
+
+2. Run application:
+
+-> With **yarn**
+
+```bash
+yarn start
 ```
 
-### For Validation of forms
-```ssh
-yarn add validator
+-> With **npm**
+
+```bash
+npm start
 ```
 
-### Other packages needed:
-```ssh
-yarn add react-router react-router-dom
-yarn add prop-types
-yarn add redux react-redux redux-thunk
-yarn add --dev redux-devtools-extension
-yarn add axios
-```
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
+Check: http://localhost:3000/
 
 ## Run Docker
 
-```ssh
+```bash
 yarn build
 bash run.sh
 ```
 
 Check: http://localhost:8080/
 
-PS: make sure with command:  `docker ps -a` that there isn't another container running with the same APP name. (file run.sh)
+PS: make sure with command:  `docker ps -a` that there isn't another container running with the same APP name.  (check app name in: file run.sh)
