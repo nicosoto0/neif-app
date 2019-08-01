@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fbDataRequest } from './services/fbDataRequest';
+import { fbDataRequest } from '../utils/services/fbDataRequest';
 import { Form, Button } from "semantic-ui-react";
-import DisplayPosts from "./DisplayPosts";
-import DisplayPost from "./DisplayPost";
+import DisplayPosts from "../utils/DisplayPosts";
+import DisplayPost from "../utils/DisplayPost";
 
 
 export class AccountOptions extends Component {
@@ -43,7 +43,6 @@ export class AccountOptions extends Component {
 
         const response = await this.getAccoutData(this.state.account.access_token, fields);
         
-        console.log(response.posts.data);
         if (!this.state.errors.hasOwnProperty('fbAccount')){
             this.setState({ 
                 dataPosts: response.posts.data,
@@ -159,11 +158,9 @@ export class AccountOptions extends Component {
         }
 
 
-        // let fromPost;
-
         return (
             <div>
-                <h1>{this.state.account.name}</h1>
+                <h1>{this.state.account.name} </h1>
                 {Content}
             </div>
         );

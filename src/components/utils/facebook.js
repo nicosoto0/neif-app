@@ -17,16 +17,9 @@ export class Facebook extends Component {
     }
 
     componentDidMount() {
-        //this.loadComments();
+
         this.checkValidToken(this.props.fb_toke);
 
-        if (this.state.errors.hasOwnProperty('fbLogin')){
-            localStorage.removeItem('neif_analytics');
-            this.setState({
-                isLoggedIn: false,
-                token: ''
-            });
-        }
       }
 
 
@@ -43,6 +36,14 @@ export class Facebook extends Component {
             errors.fbLogin = request.error.message;
         }
         this.setState({ errors });
+
+        if (this.state.errors.hasOwnProperty('fbLogin')){
+            localStorage.removeItem('neif_analytics');
+            this.setState({
+                isLoggedIn: false,
+                token: ''
+            });
+        }
 
     }
 
@@ -103,12 +104,14 @@ export class Facebook extends Component {
             );
 
         } else {
-            fbContent =(
+            fbContent =(  
                 <div>
-                    <Button href="/fb/profile">Fb Profile Info</Button>
-                    <br />
-                    <br />
-                    <Button href="/fb/accounts">Fb FanPages</Button>
+                    <h3>Select Option</h3>
+                    <ul>
+                        <li><Button href="/fb/profile">Fb Profile Info</Button></li>
+                        <br />
+                        <li><Button href="/fb/accounts">Fb FanPages</Button></li>
+                    </ul>
                 </div>
 
             );
@@ -122,8 +125,6 @@ export class Facebook extends Component {
 
 }
 
-// <FbShowProfile accessToken={this.state.token} />
-// <FbAccounts accessToken={this.state.token}/>
 
 Facebook.propTypes = {
     LoggedInFb: PropTypes.bool.isRequired

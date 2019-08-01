@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fbDataRequest } from './services/fbDataRequest';
+import { fbDataRequest } from '../utils/services/fbDataRequest';
 import { Button } from 'semantic-ui-react'
 import { AccountOptions }  from './AccountOptions'
 
@@ -85,7 +85,8 @@ export class FbAccounts extends Component {
                         return (
                             <div key={i}>
                                 <br />
-                                <Button onClick={() => this.handleSelectAccount(account)}>{account.name}</Button> 
+                                {/* <Button onClick={() => this.handleSelectAccount(account)}>{account.name}</Button> */}
+                                <Button href={"/fb/accounts/"+account.id}>{account.name}</Button>
                             </div>
                         )
                         })

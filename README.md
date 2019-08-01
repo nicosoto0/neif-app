@@ -36,7 +36,7 @@ npm start
 
 Check: http://localhost:3000/
 
-## Run Docker
+# Run Docker
 
 ```bash
 yarn build

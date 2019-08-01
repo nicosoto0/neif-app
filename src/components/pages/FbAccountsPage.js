@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import FbAccounts from '../utils/FbAccounts';
+import FbAccounts from '../fanpages/FbAccounts';
 import {
   Button
 } from 'semantic-ui-react'
