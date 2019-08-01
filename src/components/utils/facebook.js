@@ -106,6 +106,7 @@ export class Facebook extends Component {
         } else {
             fbContent =(  
                 <div>
+                    <div align="center"><h2>Nei Fb Menu</h2></div>
                     <h3>Select Option</h3>
                     <ul>
                         <li><Button href="/fb/profile">Fb Profile Info</Button></li>

@@ -10,7 +10,6 @@ import InDevelopmentPage from "./components/pages/InDevelopmentPage"
 import AppHeader from "./components/utils/AppHeader";
 
 
-
 const App = () => (
   <div>
     <AppHeader />
@@ -22,7 +21,8 @@ const App = () => (
       <Route path="/fb/accounts/:accountId" component={FbAccountIndexPage} />
       <Route path="/InDevelopment" component={InDevelopmentPage} />
     </div>
-  </div>);
+  </div>
+);
 
 //      <Route path="/login" exact component={LoginPage} /> <br />
 

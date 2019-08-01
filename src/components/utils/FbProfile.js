@@ -72,7 +72,6 @@ export class FbProfile extends Component {
             
         }
 
-
         return (
             <div>
                 {Content}
